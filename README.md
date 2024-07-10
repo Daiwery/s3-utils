@@ -1,18 +1,21 @@
 # s3-utils
-В папке serverless/s3 находится набор инструментов для взаимодействия с Yandex Object Storage, реализованный с помощью boto3. Было бы логичнее создать для этого набора отдельный репозиторий, но это будет лишнее, поскольку кода не так много. 
+It is a set of tools for interaction with Yandex Object Storage implemented using boto3 library. 
 
-- Для удобства пользования инструментами для текущего сеанса в терминале можно создать псевдонимы командой
+- For installing run setup.sh.
 ```bash
-. aliases.sh
-``` 
-- Аутентификация во всех инструментах производится с помощью профилей, содержащихся в файле .aws/credentials.
+bash setup.sh
+```
+
+- After installing it is possible to use s3-utils as CLI.
+```bash
+download profile command args
+```
+For more info see 'help'.
+
+- Authentication in all commands is performed using profiles contained in the .aws/credentials file.
 ```
 # .aws/credentials
 [default]
   aws_access_key_id = 
   aws_secret_access_key = 
-```
-- Все инструменты созданы как CLI, что позволяет, например, делать вот так:
-```bash
-download profile -dir build $(list_objects profile | grep .js$)
 ```
