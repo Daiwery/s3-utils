@@ -57,6 +57,10 @@ def create_parser():
         help="The parent directory for files (default: current directory)"
     )
     parser_download.add_argument(
+        "--basename", action="store_true",
+        help="If it is true convert keys to base names."
+    )
+    parser_download.add_argument(
         "keys", nargs="*", default="all",
         help="The keys of the objects to download (default: all files)"
     )

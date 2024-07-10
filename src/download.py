@@ -12,9 +12,13 @@ def download(args):
         args.keys = s3.list_objects(Bucket=args.bucket)["Contents"]
         args.keys = list(map(lambda item: item["Key"], args.keys))
 
+    local_keys = args.keys
+    if args.basename:
+        local_keys = list(map(os.path.basename, local_keys))
+
     # Calculate unique directories.
     dirs = []
-    for key in args.keys:
+    for key in local_keys:
         path = Path(key)
         if args.dir != "":
             path = Path(args.dir).joinpath(path)
@@ -28,7 +32,7 @@ def download(args):
             os.mkdir(i_dir)
 
     # Download.
-    keys = tqdm(args.keys, desc="Download")
-    for key in keys:
+    keys = tqdm(enumerate(args.keys), desc="Download")
+    for i, key in keys:
         keys.set_description(f"Download ({os.path.basename(key)})")
-        s3.download_file(args.bucket, key, os.path.join(args.dir, key))
+        s3.download_file(args.bucket, key, os.path.join(args.dir, local_keys[i]))
