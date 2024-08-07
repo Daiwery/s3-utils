@@ -32,7 +32,9 @@ def upload(args):
     keys = []
     if os.path.basename(args.key) == "":
         for path in args.path:
-            keys.append(os.path.join(args.key, os.path.basename(path)))
+            if not args.rel:
+                path = os.path.basename(path)
+            keys.append(os.path.join(args.key, path))
     else:
         keys = [args.key]
 

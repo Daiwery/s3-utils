@@ -42,6 +42,9 @@ def create_parser():
     parser_upload.add_argument(
         "key", help="The key (auto add the name of files if key likes a dir-path)"
     )
+    parser_upload.add_argument(
+        "--rel", action="store_true", help="Save relative dirs in paths"
+    )
     parser_upload.set_defaults(func=upload)
 
     # --------------- download ---------------
